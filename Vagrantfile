@@ -23,4 +23,8 @@ Vagrant.configure(2) do |config|
       end
     end
   end
+
+  config.trigger.after :provision do
+    run "bin/bootstrap-consul.sh"
+  end
 end
