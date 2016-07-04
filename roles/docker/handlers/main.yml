@@ -1,0 +1,20 @@
+---
+- name: start docker
+  become: yes
+  service:
+    name: docker
+    enabled: yes
+    state: started
+- name: stop docker
+  become: yes
+  service:
+    name: docker
+    enabled: yes
+    state: stopped
+- name: restart docker
+  become: yes
+  service:
+    name: docker
+    enabled: yes
+    state: restarted
+...

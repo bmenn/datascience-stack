@@ -1,0 +1,9 @@
+---
+- name: start docker service
+  become: yes
+  become_method: sudo
+  service:
+    name: docker
+    enable: yes
+    state: started
+...

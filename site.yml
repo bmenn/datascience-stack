@@ -1,0 +1,6 @@
+---
+- hosts: configuration
+  roles:
+    - docker
+    - consul
+...

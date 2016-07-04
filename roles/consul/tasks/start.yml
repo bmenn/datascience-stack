@@ -1,0 +1,42 @@
+---
+- name: get ip address
+  shell: ip addr show dev eth1 | awk '/inet /{print substr($2,0,length($2)-3)}'
+  register: ip_address
+- name: start consul docker container
+  become: yes
+  docker_container:
+    name: consul
+    image: gliderlabs/consul
+    published_ports:
+      - "8301:8301"
+      - "8301:8301/udp"
+      - "8302:8302"
+      - "8302:8302/udp"
+      - "8300:8300"
+      - "8400:8400"
+      - "8500:8500"
+      - "8600:53/udp"
+    exposed_ports:
+      - 8301
+      - 8301/udp
+      - 8302
+      - 8302/udp
+      - 8300
+      - 8400
+      - 8500
+      - 53/udp
+    command:
+      - "agent"
+      - "-server"
+      - "-bootstrap-expect"
+      - "3"
+      - "-data-dir=/tmp/consul"
+      - "-advertise={{ item }}"
+      - "-client=0.0.0.0"
+    state: started
+    recreate: true
+  with_items: ip_address.stdout
+# Should probably do a notify here instead
+- name: bootstrap consul cluster
+  command: "curl 'http://localhost:8500/v1/agent/join/bdi-1.atomics.net'"
+...

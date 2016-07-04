@@ -1,0 +1,4 @@
+[configuration]
+bdi-1 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2200
+bdi-2 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2201
+bdi-3 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2202
