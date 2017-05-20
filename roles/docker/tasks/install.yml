@@ -5,23 +5,27 @@
     name:
       - apt-transport-https
       - ca-certificates
+      - curl
+      - software-properties-common
     update_cache: yes
     state: present
 - name: add docker repo key
   become: yes
   apt_key:
-    keyserver: hkp://p80.pool.sks-keyservers.net:80
-    id: 58118E89F3A912897C070ADBF76221572C52609D
+    url: https://download.docker.com/linux/ubuntu/gpg
     state: present
+- name: get distro name
+  command: lsb_release -cs
+  register: distro_name
 - name: add docker repo
   become: yes
   apt_repository:
-    repo: "deb https://apt.dockerproject.org/repo ubuntu-trusty main"
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ distro_name.stdout }} stable"
     state: present
 - name: install docker
   become: yes
   apt:
-    name: docker-engine
+    name: docker-ce
     update_cache: yes
     state: present
 - name: install docker-py

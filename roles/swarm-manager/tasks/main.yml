@@ -1,0 +1,10 @@
+---
+- name: check swarm initialization
+  become: yes
+  become_method: sudo
+  shell: "docker node ls | wc -l"
+  register: swarm_initialized
+- include: setup.yml
+  when: swarm_initialized.stdout == '0'
+- include: start.yml
+...

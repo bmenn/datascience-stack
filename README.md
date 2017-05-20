@@ -9,3 +9,9 @@ quickly begin work instead of building infrastructure.
     2. Run `./vagrant-setup.sh` to setup Vagrant plugins.
     3. Run `vagrant up`
     4. Run `ansible-playbook -i local site.yml`
+
+## Deploying
+This repository assumes that Ubuntu 16.04 is already installed on each
+server in the cluster.
+
+  1. Run `ansible-playbook -i your_inventory_file_here site.yml`

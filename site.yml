@@ -1,7 +1,4 @@
 ---
-- hosts: configuration
-  roles:
-    - docker
-    - consul
-    - hadoop
+- include: python-setup.yml
+- include: swarm.yml
 ...

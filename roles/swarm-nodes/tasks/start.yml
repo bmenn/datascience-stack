@@ -1,0 +1,9 @@
+---
+- name: retrieve swarm node token
+  set_fact:
+    swarm_node_token: "{{hostvars[swarm_manager_host]['swarm_node_token'].stdout}}"
+- name: join swarm cluster
+  become: yes
+  become_method: sudo
+  command: "docker swarm join --token {{ swarm_node_token }} {{ swarm_manager_host }}:2377"
+...

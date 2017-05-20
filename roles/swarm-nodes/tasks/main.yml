@@ -1,0 +1,9 @@
+---
+- name: check swarm node status
+  become: yes
+  become_method: sudo
+  shell: "docker info | grep 'Swarm: active' | wc -l"
+  register: swarm_initialized
+- include: start.yml
+  when: swarm_initialized.stdout == '0'
+...

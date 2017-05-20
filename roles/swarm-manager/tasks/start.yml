@@ -1,0 +1,9 @@
+---
+- name: get swarm node token
+  become: yes
+  become_method: sudo
+  command: "docker swarm join-token -q worker"
+  register: swarm_node_token
+- debug:
+    msg: "Swarm node token is: {{ swarm_node_token.stdout }}"
+...

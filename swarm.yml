@@ -1,0 +1,11 @@
+---
+# - hosts: swarm
+#   roles:
+#     - docker
+- hosts: swarm-manager
+  roles:
+    - swarm-manager
+- hosts: swarm-nodes
+  roles:
+    - swarm-nodes
+...
