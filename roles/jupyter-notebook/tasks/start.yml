@@ -2,18 +2,7 @@
 - name: start jupyter notebook
   become: yes
   become_method: sudo
-  docker_service:
-    project_name: notebook
-    definition:
-      version: '2'
-      services:
-        jupyter:
-          image: jupyter/datascience-notebook
-          ports:
-            - 8888:8888
-  register: output
-- name: check notebook service is running
-  assert:
-    that:
-      - "jupyter.notebook_jupyter_1.state.running"
+  # docker_service module does not currently work with Docker >=1.13
+  # swarm-mode
+  command: "docker service create --network cluster-overlay -p 8888:8888 --mount type=bind,source=/nfs,destination=/nfs --name jupyter-notebook jupyter/datascience-notebook start-notebook.sh --NotebookApp.notebook_dir=/nfs"
 ...

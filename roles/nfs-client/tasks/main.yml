@@ -1,0 +1,27 @@
+---
+- name: install nfs-common
+  become: yes
+  apt:
+    name:
+      - nfs-common
+    update_cache: yes
+    state: present
+- name: create folder for NFS data
+  become: yes
+  file:
+    path: /nfs
+    state: directory
+    mode: 0777
+- name: setup nfs in /etc/fstab
+  become: yes
+  lineinfile:
+    path: /etc/fstab
+    line: "{{ nfs_server }}:/ /nfs nfs auto 0 0"
+- name: mount nfs
+  become: yes
+  mount:
+    path: /nfs
+    src: "{{ nfs_server }}:/"
+    fstype: nfs
+    state: mounted
+...

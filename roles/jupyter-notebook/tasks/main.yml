@@ -1,4 +1,6 @@
 ---
 - include: stop.yml
+  tags: [stop]
 - include: start.yml
+  tags: [start]
 ...

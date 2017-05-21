@@ -1,0 +1,42 @@
+---
+- name: install nfs-kernel-server
+  become: yes
+  apt:
+    name:
+      - nfs-kernel-server
+    update_cache: yes
+    state: present
+- name: create folder for NFS data
+  become: yes
+  file:
+    path: /nfs_data
+    state: directory
+    mode: 0777
+- name: get default subnet
+  shell: " ip addr show dev enp0s8 | grep \"inet\\b\" | awk '{ print $2 }' | sed -e 's:\\.[0-9]\\+/:.0/:'"
+  register: subnet
+- name: setup /etc/exports
+  become: yes
+  lineinfile:
+    path: /etc/exports
+    line: "/nfs_data {{ subnet.stdout }}(rw,fsid=0,insecure,no_subtree_check,async)"
+- name: enable and restart nfs service
+  become: yes
+  service:
+    name: nfs-kernel-server
+    enabled: true
+    state: restarted
+- name: setup nfs in /etc/fstab
+  become: yes
+  lineinfile:
+    path: /etc/fstab
+    line: "/nfs_data /nfs none bind 0 0"
+- name: mount nfs
+  become: yes
+  mount:
+    path: /nfs
+    src: /nfs_data
+    fstype: none
+    opts: bind
+    state: mounted
+...
