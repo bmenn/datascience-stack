@@ -15,3 +15,17 @@ local-n4
 
 [swarm-nodes:vars]
 swarm_manager_host=local-n1
+
+[jupyter-notebook:children]
+swarm-manager
+
+[nfs-server]
+local-n1 subnet_interface=enp0s8
+
+[nfs-client]
+local-n2
+local-n3
+local-n4
+
+[nfs-client:vars]
+nfs_server=local-n1

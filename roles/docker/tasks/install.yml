@@ -31,8 +31,18 @@
 - name: install docker-py
   become: yes
   pip:
-    name: docker-py
+    name: docker
     state: present
   notify:
     - start docker
+- name: install pyyaml
+  become: yes
+  pip:
+    name: pyyaml
+    state: present
+- name: install python docker-compose
+  become: yes
+  pip:
+    name: docker-compose
+    state: present
 ...

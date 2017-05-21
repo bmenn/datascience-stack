@@ -1,0 +1,5 @@
+---
+- hosts: jupyter-notebook
+  roles:
+    - jupyter-notebook
+...

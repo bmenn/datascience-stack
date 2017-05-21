@@ -1,0 +1,8 @@
+---
+- hosts: nfs-server
+  roles:
+    - nfs-server
+- hosts: nfs-client
+  roles:
+    - nfs-client
+...

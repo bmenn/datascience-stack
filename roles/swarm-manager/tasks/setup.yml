@@ -6,4 +6,8 @@
   become: yes
   become_method: sudo
   command: "docker swarm init --advertise-addr {{ advertise_ip.stdout }}"
+- name: create cluster overlay network
+  become: yes
+  become_method: sudo
+  command: "docker network create --driver overlay cluster-overlay"
 ...
