@@ -20,4 +20,8 @@
   become: true
   roles:
     - ceph.ceph-rgw
+  tasks:
+    - name: create radosgw user ({{ radosgw_user }})
+      become: true
+      command: radosgw-admin user create --uid={{ radosgw_user }} --display-name={{ radosgw_user }}
 ...
