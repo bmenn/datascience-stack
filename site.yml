@@ -1,5 +1,7 @@
 ---
 - include: python-setup.yml
 - include: swarm.yml
+- include: nfs.yml
+- include: ceph.yml
 - include: notebook.yml
 ...
