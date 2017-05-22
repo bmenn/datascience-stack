@@ -1,0 +1,23 @@
+---
+- hosts: ceph-mons
+  become: true
+  roles:
+    - ceph.ceph-mon
+  serial: 1
+- hosts: osd-loopback
+  become: true
+  roles:
+    - osd-loopback
+- hosts: ceph-osds
+  become: true
+  roles:
+    - ceph.ceph-osd
+- hosts: ceph-mdss
+  become: true
+  roles:
+    - ceph.ceph-mds
+- hosts: ceph-rgws
+  become: true
+  roles:
+    - ceph.ceph-rgw
+...

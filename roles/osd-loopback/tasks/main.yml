@@ -1,0 +1,26 @@
+---
+- name: check /ceph_osd_block
+  stat: path=/ceph_osd_block
+  register: osd_block_file
+- name: create block file
+  become: true
+  command: "dd if=/dev/zero of=/ceph_osd_block bs={{ block_size }} count={{ block_count}}"
+  when: not osd_block_file.stat.exists
+- name: check if loop device configured
+  become: true
+  shell: "losetup | grep '/ceph_osd_block' | wc -l"
+  register: loop_configured
+- name: find free loop device
+  become: true
+  command: "losetup -f"
+  register: lo_device
+- name: create loop device
+  become: true
+  command: "losetup {{ lo_device.stdout }} /ceph_osd_block"
+  when: loop_configured.stdout == '0'
+- name: format loop device as xfs
+  filesystem:
+    dev: /dev/loop0
+    fstype: xfs
+  when: loop_configured.stdout == '0'
+...

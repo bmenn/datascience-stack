@@ -5,6 +5,7 @@ VAGRANT_VM_PROVIDER = "virtualbox"
 Vagrant.configure(2) do |config|
   (1..N).each do |i|
     config.vm.define "local-n#{i}" do |node|
+      node.disksize.size = "15GB"
       node.vm.provider "virtualbox" do |vb|
         vb.memory = 4096
         vb.cpus = 2

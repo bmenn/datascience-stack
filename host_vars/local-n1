@@ -2,4 +2,7 @@
 ansible_ssh_user: ubuntu
 ansible_ssh_port: 2200
 ansible_ssh_private_key_file: .vagrant/machines/local-n1/virtualbox/private_key
+monitor_interface: enp0s8
+public_network: 172.16.1.0/16
+cluster_network: 172.16.1.0/16
 ...
