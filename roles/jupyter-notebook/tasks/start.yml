@@ -4,5 +4,5 @@
   become_method: sudo
   # docker_service module does not currently work with Docker >=1.13
   # swarm-mode
-  command: "docker service create --network cluster-overlay -p 8888:8888 --mount type=bind,source=/nfs,destination=/nfs --name jupyter-notebook jupyter/datascience-notebook start-notebook.sh --NotebookApp.notebook_dir=/nfs"
+  command: "docker service create --network cluster-overlay -p 8888:8888 --mount type=bind,source=/nfs,destination=/nfs --name jupyter-notebook bmenn/datascience-notebook start-notebook.sh --NotebookApp.notebook_dir=/nfs"
 ...
