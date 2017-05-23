@@ -1,0 +1,8 @@
+---
+- hosts: ipyparallel-controller
+  roles:
+    - ipyparallel-controller
+- hosts: ipyparallel-engine
+  roles:
+    - ipyparallel-engine
+...

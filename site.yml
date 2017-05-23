@@ -3,5 +3,6 @@
 - include: swarm.yml
 - include: nfs.yml
 - include: ceph.yml
+- include: ipyparallel.yml
 - include: notebook.yml
 ...

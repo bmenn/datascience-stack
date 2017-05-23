@@ -1,0 +1,7 @@
+---
+- name: stop ipyparallel engine
+  become: yes
+  become_method: sudo
+  command: "docker service rm ipengine"
+...
+

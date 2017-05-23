@@ -1,0 +1,14 @@
+---
+- name: create folder for ipyparallel files
+  become: yes
+  file:
+    path: "/nfs/ipyparallel/profile_{{ ipyparallel_profile | default('default')}}"
+    state: directory
+    mode: 0777
+- name: start ipyarallel ipengine
+  become: yes
+  become_method: sudo
+  # docker_service module does not currently work with Docker >=1.13
+  # swarm-mode
+  command: "docker service create --network cluster-overlay --mount type=bind,source=/nfs/ipyparallel/profile_{{ ipyparallel_profile | default('default') }},destination=/home/jovyan/.ipython/profile_default --replicas {{ engine_count }} --name ipengine bmenn/datascience-notebook ipengine"
+...

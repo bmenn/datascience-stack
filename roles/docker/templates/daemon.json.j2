@@ -1,0 +1,8 @@
+{
+        "registry-mirrors": [{% if registry_mirror is defined %}
+                "{{ registry_mirror }}"
+        {% endif %}],
+        "insecure-registry": [{% if insecure_registry is defined %}
+                "{{ insecure_registry }}"
+        {% endif %}]
+}

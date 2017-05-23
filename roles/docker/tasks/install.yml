@@ -45,4 +45,11 @@
   pip:
     name: docker-compose
     state: present
+- name: configure docker daemon
+  become: yes
+  template:
+    src: ../templates/daemon.json.j2
+    dest: /etc/docker/daemon.json
+  notify:
+    - restart docker
 ...

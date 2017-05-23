@@ -1,0 +1,7 @@
+---
+- name: stop ipyparallel controller
+  become: yes
+  become_method: sudo
+  command: "docker service rm ipcontroller"
+...
+
