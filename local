@@ -15,6 +15,7 @@ local-n4
 
 [swarm-nodes:vars]
 swarm_manager_host=local-n1
+swarm_manager_addr=local-n1
 
 [jupyter-notebook:children]
 swarm-manager

@@ -5,5 +5,5 @@
 - name: join swarm cluster
   become: yes
   become_method: sudo
-  command: "docker swarm join --token {{ swarm_node_token }} {{ swarm_manager_host }}:2377"
+  command: "docker swarm join --token {{ swarm_node_token }} {{ swarm_manager_addr }}:2377"
 ...

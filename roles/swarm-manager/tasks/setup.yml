@@ -1,7 +1,9 @@
 ---
 - name: get advertise ip
-  shell: " ip addr show dev enp0s8 | grep \"inet\\b\" | awk '{ print $2 }' | cut -f 1 -d '/'"
+  shell: " ip addr show dev {{ monitor_interface }} | grep \"inet\\b\" | awk '{ print $2 }' | cut -f 1 -d '/'"
   register: advertise_ip
+- name: Check output
+  debug: var=advertise_ip
 - name: initialize swarm cluster
   become: yes
   become_method: sudo
